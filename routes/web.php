@@ -42,10 +42,7 @@ Route::middleware('auth:chv')->group(function () {
         return view('volunteerss');
     })->name('volunteerss');
 
-    Route::get('/elderly', [elderlyController::class, 'index'])->name('elderly');
-    // Route::get('elderly', function () {
-    //     return view('elderly');
-    // })->name('elderly');
+    Route::get('/elderly', [AuthController::class, 'showElderly'])->name('elderly');
 
     Route::get('formelderly', [FormElderlyController::class, 'index'])->name('formelderly');
 

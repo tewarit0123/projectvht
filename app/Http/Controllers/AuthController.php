@@ -72,4 +72,18 @@ class AuthController extends Controller
 
         return redirect('/login');
     }
+
+    public function showElderly()
+    {
+        // Get the currently logged in CHV's ID
+        $chvId = Auth::guard('chv')->user()->idchv;
+        
+        // Fetch elders assigned to this CHV through the chv_elder relationship table
+        $elders = Elder::join('chv_elder', 'elder.e_id', '=', 'chv_elder.e_id')
+            ->where('chv_elder.idchv', $chvId)
+            ->select('elder.*')
+            ->get();
+
+        return view('elderly', compact('elders'));
+    }
 }

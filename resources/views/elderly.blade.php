@@ -59,7 +59,7 @@
                     <p><strong>รหัสประจำตัวประชาชน อสม.:</strong> {{ Auth::guard('chv')->user()->id_card }} </p>
                 </div>
                 <div class="col-md-6">
-                    <p><strong>หมู่บ้านที่ทำงานอยู่:</strong> {{ Auth::guard('chv')->user()->village_name ?? 'ข้อมูลไม่พบ' }} </p>
+                    <p><strong>หมู่บ้านที่ทำงานอยู่:</strong> {{ Auth::guard('chv')->user()->village_name }}</p>
                 </div>
             </div>
         </div>
@@ -76,15 +76,17 @@
                 </tr>
             </thead>
             <tbody>
+                @foreach ($elders as $elder)
                 <tr>
-                    <td>1</td>
-                    <td>นายวิทยา สุขเกษม</td>
-                    <td>75</td>
-                    <td>123 หมู่ 5 ซอย 3</td>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ isset($elder->titlename) ? $elder->titlename . ' ' : '' }}{{ $elder->fullname }}</td>
+                    <td>{{ \Carbon\Carbon::parse($elder->birth_date)->age }} ปี</td>
+                    <td>{{ $elder->address }}</td>
                     <td>
                         <a href="{{ route('formanalysis') }}" class="btn btn-primary btn-sm">ดูข้อมูล</a>
                     </td>
                 </tr>
+                @endforeach
             </tbody>
         </table>
     </div>
