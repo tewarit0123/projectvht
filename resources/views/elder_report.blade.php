@@ -52,7 +52,7 @@
             <div class="header text-start">
                 @if(isset($chvselect) && $chvselect->isNotEmpty())
                     <h3>ชื่อ อสม. : {{ $chvselect[0]->fullname }}</h3>
-                    <h4>ชื่อหมู่บ้าน : {{ $chvselect[0]->village_name }}</h4>
+                    <h4>ชื่อหมู่บ้าน : {{ $chvselect[0]->v_name }}</h4>
                 @endif
             </div>
             <table class="table table-bordered table-striped">

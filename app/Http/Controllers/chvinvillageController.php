@@ -12,12 +12,18 @@ class chvinvillageController extends Controller
 {
     public function index(Request $request)
     {
-        $villages = Village::all(); // Fetch all villages from the database
+        // Get all villages and count CHVs for each village
+        $villages = Village::leftJoin('chvin_v', 'village.v_id', '=', 'chvin_v.v_id')
+            ->select('village.*')
+            ->selectRaw('COUNT(chvin_v.idchv) as chv_count')
+            ->groupBy('village.v_id', 'village.v_name')
+            ->get();
+
         // Fetch volunteers not associated with chvin_v
         $volunteers = chv::leftJoin('chvin_v', 'chv.id_card', '=', 'chvin_v.idchv')
             ->whereNull('chvin_v.idchv')
             ->select('chv.*')
-            ->get(); // เปลี่ยนจาก Volunteer เป็น chv
+            ->get();
        
         return view('chvinvillage', compact('villages', 'volunteers'));
     }

@@ -15,6 +15,7 @@ use App\Http\Controllers\userinelderController;
 use App\Http\Controllers\elderinvolunteerController;
 use App\Http\Controllers\elderlyController;
 use App\Http\Controllers\PdfController;
+use App\Http\Controllers\VolunteerAssessmentController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -38,9 +39,7 @@ Route::middleware('auth:chv')->group(function () {
     Route::put('/volunteers/{id}', [VolunteerController::class, 'update'])->name('volunteers.update');
     Route::delete('/volunteers/{id}', [VolunteerController::class, 'destroy'])->name('volunteers.destroy');
 
-    Route::get('/volunteerss', function () {
-        return view('volunteerss');
-    })->name('volunteerss');
+    Route::get('/volunteerss', [VolunteerAssessmentController::class, 'index'])->name('volunteerss');
 
     Route::get('/elderly', [AuthController::class, 'showElderly'])->name('elderly');
 
@@ -93,7 +92,7 @@ Route::middleware('auth:chv')->group(function () {
 
     Route::post('/userinelder', [userinelderController::class, 'store'])->name('userinelder.store');
 
-    Route::get('/formanalysis', [FormAnalysisController::class, 'index'])->name('formanalysis');
+    Route::get('/formanalysis/{e_id?}', [FormAnalysisController::class, 'index'])->name('formanalysis');
  
     
 
@@ -103,6 +102,10 @@ Route::middleware('auth:chv')->group(function () {
 
     Route::get('/elder-report/export-pdf/{volunteerId}', [FormVolunteerController::class, 'exportPDF'])->name('elder.export.pdf');
 
+    Route::get('/volunteer-assessment', [VolunteerAssessmentController::class, 'index'])->name('volunteer.assessment');
+    Route::get('/get-elder-details', [VolunteerAssessmentController::class, 'getElderDetails']);
+
+    Route::post('/store-volunteer', [VolunteerAssessmentController::class, 'store'])->name('store.volunteer');
 
 });
 

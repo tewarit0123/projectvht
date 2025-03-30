@@ -83,7 +83,7 @@
                     <td>{{ \Carbon\Carbon::parse($elder->birth_date)->age }} ปี</td>
                     <td>{{ $elder->address }}</td>
                     <td>
-                        <a href="{{ route('formanalysis') }}" class="btn btn-primary btn-sm">ดูข้อมูล</a>
+                        <a href="{{ route('formanalysis', ['e_id' => $elder->e_id]) }}" class="btn btn-primary btn-sm">ดูข้อมูล</a>
                     </td>
                 </tr>
                 @endforeach

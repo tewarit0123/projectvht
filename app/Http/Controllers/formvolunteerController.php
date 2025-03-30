@@ -168,11 +168,12 @@ class FormVolunteerController extends Controller
 
         $chvselect = chv::leftJoin('chvin_v', 'chv.id_card', '=', 'chvin_v.idchv')
             ->leftJoin('village', 'chvin_v.v_id', '=', 'village.v_id')
-            ->select('chv.fullname', 'village.v_name as village_name')
+            ->select('chv.fullname', 'village.v_name')
             ->where('chv.idchv', $volunteerId)
             ->get(); 
+        // echo $chvselect;
 
-        return view('elder_report', compact('elders','chvselect'));
+        return view('elder_report', compact('elders', 'chvselect'));
     }
 
     public function exportPDF($volunteerId)
@@ -199,7 +200,7 @@ class FormVolunteerController extends Controller
 
         $chvselect = chv::leftJoin('chvin_v', 'chv.id_card', '=', 'chvin_v.idchv')
             ->leftJoin('village', 'chvin_v.v_id', '=', 'village.v_id')
-            ->select('chv.fullname', 'village.v_name as village_name')
+            ->select('chv.fullname', 'village.v_name')
             ->where('chv.idchv', $volunteerId)
             ->get();
 

@@ -6,27 +6,139 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>รายชื่อผู้สูงอายุและการจัดการ อสม</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        .bg-purple {
+            background-color: #8e44ad;
+            color: white;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            font-family: 'Kanit', sans-serif;
+        }
+
+        .form-container {
+            background-color: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(142, 68, 173, 0.2);
+        }
+
+        .table {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+        }
+
+        /* .table thead th {
+            background: linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%);
+            color: white;
+            border: none;
+        } */
+
+        .btn {
+            padding: 8px 20px;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+            border: none;
+            box-shadow: 0 4px 15px rgba(46, 204, 113, 0.2);
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, #f39c12 0%, #f1c40f 100%);
+            border: none;
+            box-shadow: 0 4px 15px rgba(243, 156, 18, 0.2);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .form-select {
+            border-radius: 8px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .modal-content {
+            border-radius: 15px;
+            border: none;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%);
+            color: white;
+            border-radius: 15px 15px 0 0;
+            padding: 20px 25px;
+        }
+
+        .pagination {
+            margin-top: 20px;
+        }
+
+        .page-link {
+            color: #8e44ad;
+            border-radius: 5px;
+            margin: 0 2px;
+            border: none;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .page-item.active .page-link {
+            background: linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%);
+            border: none;
+        }
+    </style>
 </head>
 
 <body>
     @include('layouts.navg')
-    <div class="container mt-5">
-        <h2 class="text-center mb-4">รายชื่อผู้สูงอายุในหมู่บ้าน</h2>
-        <form method="GET" action="{{ route('elderinvolunteer') }}">
-            <div class="row mb-3">
-                <div class="col-md-4">
-                    <div class="form-floating mb-3">
-                        <select class="form-select" id="villageInput" name="villageInput" required onchange="this.form.submit()">
-                            <option value="" selected>เลือกหมู่บ้าน</option>
-                            @foreach ($villages as $village)
-                            <option value="{{ $village->v_name }}" {{ request('villageInput') == $village->v_name ? 'selected' : '' }}>{{ $village->v_name }}</option>
-                            @endforeach
-                        </select>
-                        <label for="villageInput">ชื่อหมู่บ้าน</label>
+    <div class="container">
+        <div class="form-container">
+            <h2 class="header">
+                <i class="fas fa-users me-2"></i>
+                รายชื่อผู้สูงอายุในหมู่บ้าน
+            </h2>
+
+            <form method="GET" action="{{ route('elderinvolunteer') }}" class="mb-4">
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <select class="form-select" id="villageInput" name="villageInput" required onchange="this.form.submit()">
+                                <option value="" selected>เลือกหมู่บ้าน</option>
+                                @foreach ($villages as $village)
+                                <option value="{{ $village->v_name }}" {{ request('villageInput') == $village->v_name ? 'selected' : '' }}>
+                                    {{ $village->v_name }}
+                                </option>
+                                @endforeach
+                            </select>
+                            <label for="villageInput">
+                                <i class="fas fa-home me-2"></i>ชื่อหมู่บ้าน
+                            </label>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </form>
+            </form>
 
         @if(request('villageInput'))
             <h3 class="text-center mb-4">หมู่บ้าน: {{ request('villageInput') }}</h3>
@@ -51,7 +163,7 @@
                 @else
                     @foreach ($elders as $elder)
                     <tr class="text-center">
-                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ ($elders->currentPage() - 1) * $elders->perPage() + $loop->iteration }}</td>
                         <td class="text-start">{{ $elder->titlename }} {{ $elder->fullname }}</td>
                         <td>{{ \Carbon\Carbon::parse($elder->birth_date)->age }} ปี</td>
                         <td class="text-start">{{ $elder->v_name }}</td>
@@ -95,22 +207,32 @@
 
     </div>
 
+    <!-- Modal -->
     <div class="modal fade" id="addChvModal" tabindex="-1">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">เพิ่ม อสม. ให้ผู้สูงอายุ</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    <h5 class="modal-title">
+                        <i class="fas fa-user-plus me-2"></i>
+                        เพิ่ม อสม. ให้ผู้สูงอายุ
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body p-4">
                     <form id="addChvForm">
                         <input type="hidden" id="villageSelect" name="village">
                         <input type="hidden" id="elderId" name="elder_id">
-                        <div class="mb-3">
-                            <label for="chv">ชื่อ อสม.</label>
-                            <select id="chv" name="chv" class="form-control" required></select>
+                        <div class="mb-4">
+                            <label for="chv" class="form-label">
+                                <i class="fas fa-user-nurse me-2"></i>ชื่อ อสม.
+                            </label>
+                            <select id="chv" name="chv" class="form-select" required></select>
                         </div>
-                        <button type="submit" class="btn btn-primary">บันทึก</button>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-success px-4">
+                                <i class="fas fa-save me-2"></i>บันทึก
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>

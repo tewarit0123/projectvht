@@ -97,7 +97,7 @@
             <div class="form-floating mb-3">
                 <div class="">
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="id_card" name="id_card" required maxlength="13" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                        <input type="text" class="form-control" id="id_card" name="id_card" required maxlength="13" oninput="this.value = this.value.replace(/[^0-9]/g, '')" disabled>
                         <label for="id_card">เลขบัตรประชาชน</label>
                         <div id="id_card_error" class="text-danger"></div>
                     </div>
@@ -107,7 +107,7 @@
             <div class="row mb-3">
                 <div class="col-md-4">
                     <div class="form-floating">
-                        <select class="form-select" id="titlename" name="titlename" required onchange="setGender()">
+                        <select class="form-select" id="titlename" name="titlename" required onchange="setGender()" disabled>
                             <option value="" disabled selected>กรุณาเลือกคำนำหน้าชื่อ</option>
                             <option value="นาย">นาย</option>
                             <option value="นาง">นาง</option>
@@ -118,8 +118,19 @@
                 </div>
                 <div class="col">
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="fullname" name="fullname" required>
+                        <select class="form-select" id="fullname" name="fullname" required onchange="getElderDetails()" >
+                            <option value="" disabled selected>กรุณาเลือกชื่อ-นามสกุล</option>
+                            @foreach($elders as $elder)
+                                <option value="{{ $elder->fullname }}">{{ $elder->fullname }}</option>
+                            @endforeach
+                        </select>
                         <label for="fullname">ชื่อ-นามสกุล</label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="gender" name="gender" required readonly disabled>
+                        <label for="gender">เพศ</label>
                     </div>
                 </div>
             </div>
@@ -127,19 +138,19 @@
             <div class="row mb-3">
                 <div class="col">
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="address" name="address" required>
+                        <input type="text" class="form-control" id="address" name="address" required disabled>
                         <label for="address">ที่อยู่</label>
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="village" name="village" required>
+                        <input type="text" class="form-control" id="village" name="village" required disabled>
                         <label for="village">หมู่บ้าน</label>
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="phone" name="phone" required>
+                        <input type="text" class="form-control" id="phone" name="phone" required disabled>
                         <label for="phone">เบอร์โทรศัพท์</label>
                     </div>
                 </div>
@@ -148,43 +159,32 @@
             <div class="row mb-3">
                 <div class="col">
                     <div class="form-floating">
-                        <input type="date" class="form-control" id="birth_date" name="birth_date" required>
+                        <input type="date" class="form-control" id="birth_date" name="birth_date" required disabled>
                         <label for="birth_date">วัน เดือน ปีเกิด</label>
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-floating">
-                        <input type="number" class="form-control" id="age" name="age" required>
+                        <input type="number" class="form-control" id="age" name="age" required disabled>
                         <label for="age">อายุ</label>
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-floating">
-                        <input type="number" class="form-control" id="height" name="height" required>
+                        <input type="number" class="form-control" id="height" name="height" 
+                        required disabled>
                         <label for="height">ส่วนสูง (เซนติเมตร)</label>
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-floating">
-                        <input type="number" class="form-control" id="weight" name="weight" required>
+                        <input type="number" class="form-control" id="weight" name="weight" required disabled>
                         <label for="weight">น้ำหนัก (กิโลกรัม)</label>
                     </div>
                 </div>
             </div>
 
-            <div class="mb-3">
-                <label class="form-label">เพศ</label>
-                <div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="gender" id="male" value="ชาย" required>
-                        <label class="form-check-label" for="male">ชาย</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="gender" id="female" value="หญิง" required>
-                        <label class="form-check-label" for="female">หญิง</label>
-                    </div>
-                </div>
-            </div>
+
 
             <div class="container mt-4">
                 <div class="header text-center">
@@ -218,7 +218,7 @@
                 </div>
                 <div class="tab-content" id="nutrition">
                     <h5>ด้านการขาดสารอาหาร</h5>
-                    <label class="form-label">น้ำหนักลดมากกว่า 3 กิโลกรัมภายในช่วงเวลา 3 เดือนที่ผ่านมา (โดยไม่ได้ตั้งใจ ลดน้ำหนัก)</label>
+                    <label class="form-label">น้ำหนักลดมากกว่า 3 กิโลกรัมภายในช่วงเวลา 3 เดือนที่ผ่านมารวมวันนี้ (โดยไม่ได้ตั้งใจ ลดน้ำหนัก)</label>
                     <select class="form-select">
                         <option selected>เลือกคำตอบ</option>
                         <option value="1">มี</option>
@@ -359,6 +359,26 @@
             setDateRestrictions(); // Set date restrictions when the page loads
             document.getElementById('birth_date').addEventListener('change', calculateAge);
         });
+
+        function getElderDetails() {
+            const fullname = document.getElementById('fullname').value;
+            fetch(`/get-elder-details?fullname=${fullname}`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('id_card').value = data.id_card;
+                    document.getElementById('titlename').value = data.titlename;
+                    document.getElementById('gender').value = data.gender;
+                    document.getElementById('address').value = data.address;
+                    document.getElementById('village').value = data.village;
+                    document.getElementById('phone').value = data.phone;
+                    document.getElementById('birth_date').value = data.birth_date;
+                    document.getElementById('height').value = Math.round(data.height);
+                    document.getElementById('weight').value = Math.round(data.weight);
+                    
+                    // คำนวณอายุอัตโนมัติ
+                    calculateAge();
+                });
+        }
     </script>
 </body>
 

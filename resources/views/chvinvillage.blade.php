@@ -9,70 +9,142 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <style>
 .bg-purple {
-    background-color: #e6b3e6;
+    background-color: #8e44ad;
+    color: white;
 }
 
 body {
-    background-color: #f8f9fa;
+    background-color: #f0f2f5;
+    font-family: 'Kanit', sans-serif;
 }
 
 .form-container {
     background-color: white;
-    border-radius: 10px;
-    padding: 20px;
-    margin-top: 20px;
+    border-radius: 15px;
+    padding: 30px;
+    margin-top: 30px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .header {
-    background-color: #e6b3e6;
-    color: black;
-    padding: 10px;
-    border-radius: 5px;
-    margin-bottom: 20px;
+    background: linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%);
+    color: white;
+    padding: 15px 25px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 15px rgba(142, 68, 173, 0.2);
 }
 
 .card {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     border: none;
     border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    background: white;
 }
 
 .card:hover {
-    transform: scale(1.05);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.card-body {
+    padding: 25px;
 }
 
 .card-title {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #333;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 15px;
 }
 
 .card-text {
-    font-size: 1rem;
-    color: #666;
+    font-size: 1.1rem;
+    color: #34495e;
+    margin-bottom: 20px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
 }
 
 .btn-primary {
-    background-color: #007bff;
+    background: linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%);
     border: none;
+    box-shadow: 0 4px 15px rgba(142, 68, 173, 0.2);
 }
 
 .btn-primary:hover {
-    background-color: #0056b3;
+    background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(142, 68, 173, 0.3);
 }
 
 .btn-secondary {
-    background-color: #6c757d;
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
     border: none;
+    box-shadow: 0 4px 15px rgba(44, 62, 80, 0.2);
 }
 
 .btn-secondary:hover {
-    background-color: #5a6268;
+    background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(44, 62, 80, 0.3);
+}
+
+/* Modal Styles */
+.modal-content {
+    border-radius: 15px;
+    border: none;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+    background: linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%);
+    color: white;
+    border-radius: 15px 15px 0 0;
+    padding: 20px 25px;
+}
+
+.modal-body {
+    padding: 25px;
+}
+
+.table {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+}
+
+.table thead th {
+    background: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+.select2-container .select2-selection--single {
+    height: 38px;
+    border-radius: 8px;
+    border: 1px solid #ced4da;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: 38px;
+    padding-left: 15px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 36px;
 }
 </style>
 
@@ -88,8 +160,8 @@ body {
                 <div class="col-md-4">
                     <div class="card" data-village="{{ $village->v_name }}">
                         <div class="card-body">
-                            <h5 class="card-title">{{ $village->v_name }}</h5>
-                            <p class="card-text">จำนวน อสม. : {{ $village->volunteer}} คน</p>
+                            <h5 class="card-title"><i class="fas fa-home"></i> {{ $village->v_name }}</h5>
+                            <p class="card-text">จำนวน อสม. : {{ $village->chv_count }} คน</p>
                             <button class="btn btn-primary" data-bs-toggle="modal"
                                 data-bs-target="#manageVolunteersModal" data-village="{{ $village->v_name }}"
                                 data-village-id="{{ $village->v_id }}">จัดการ อสม.</button>
@@ -200,7 +272,7 @@ body {
                 </div>
                 <div class="modal-body">
                     <p>จัดการ อสม. สำหรับหมู่บ้าน: <span id="village-name"></span></p>
-                    <table class="table table-bordered">
+                    <table class="table table-bordered ">
                         <thead>
                             <tr class="text-center">
                                 <th style="width: 5%;">ที่</th>

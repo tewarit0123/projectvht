@@ -21,40 +21,6 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e6b3e6;">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Admin</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav align-items-center">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route('formvolunteerindex')}}">ข้อมูล อสม.</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route('formvillageindex')}}">ข้อมูลหมู่บ้าน</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route('formelderlyindex')}}">กรอกข้อมูลผู้สูงอายุ</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="path_to_profile_image.jpg" alt="Profile" class="rounded-circle" width="32" height="32">
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">โปรไฟล์</a></li>
-                            <li><a class="dropdown-item" href="#">ตั้งค่า</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">ออกจากระบบ</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
 
     <div class="container mt-5">
         <div class="d-flex justify-content-between align-items-center mb-3 ">
