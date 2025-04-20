@@ -16,6 +16,8 @@ use App\Http\Controllers\elderinvolunteerController;
 use App\Http\Controllers\elderlyController;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\VolunteerAssessmentController;
+use App\Http\Controllers\MonthlySurveyController;
+use App\Http\Controllers\doctorController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -82,10 +84,12 @@ Route::middleware('auth:chv')->group(function () {
     Route::delete('/userinelder/{u_id}', [userinelderController::class, 'destroy'])->name('userinelder.destroy');
     Route::put('/userinelder/{u_id}', [userinelderController::class, 'update'])->name('userinelder.update');
 
-    Route::get('/elderinvolunteer', [elderinvolunteerController::class, 'index'])->name('elderinvolunteer');
-    Route::post('/elderinvolunteer/store', [elderinvolunteerController::class, 'store'])->name('elderinvolunteer.store');
-    Route::put('/elderinvolunteer/{id}', [elderinvolunteerController::class, 'update'])->name('elderinvolunteer.update');
-    Route::delete('/elderinvolunteer/{id}', [elderinvolunteerController::class, 'destroy'])->name('elderinvolunteer.destroy');
+    Route::get('/doctor', [doctorController::class, 'index'])->name('doctor');
+
+    // Route::get('/elderinvolunteer', [elderinvolunteerController::class, 'index'])->name('elderinvolunteer');
+    // Route::post('/elderinvolunteer/store', [elderinvolunteerController::class, 'store'])->name('elderinvolunteer.store');
+    // Route::put('/elderinvolunteer/{id}', [elderinvolunteerController::class, 'update'])->name('elderinvolunteer.update');
+    // Route::delete('/elderinvolunteer/{id}', [elderinvolunteerController::class, 'destroy'])->name('elderinvolunteer.destroy');
 
     Route::get('/api/chvin_v/{v_id}', [elderinvolunteerController::class, 'chvine'])->name('elderinvolunteer.chvine');
     Route::post('/store-chv-elder', [elderinvolunteerController::class, 'storeChvElder']);
@@ -106,7 +110,10 @@ Route::middleware('auth:chv')->group(function () {
     Route::get('/get-elder-details', [VolunteerAssessmentController::class, 'getElderDetails']);
 
     Route::post('/store-volunteer', [VolunteerAssessmentController::class, 'store'])->name('store.volunteer');
-
+    
+Route::post('/monthly-survey', [MonthlySurveyController::class, 'store'])->name('monthly-survey.store');
 });
 
 // require __DIR__ . '/auth.php';
+Route::get('/elderly/dashboard', [elderlyController::class, 'dashboard'])->name('elder.dashboard');
+

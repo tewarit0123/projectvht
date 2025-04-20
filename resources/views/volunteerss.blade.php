@@ -1,33 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>แบบสำรวจ</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         .bg-purple {
-            background-color: #e6b3e6;
+            background: linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%);
+            color: white;
         }
 
         body {
-            background-color: #f4f6f9;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            font-family: 'Kanit', sans-serif;
+        }
+
+        .container {
+            background-color: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(142, 68, 173, 0.2);
         }
 
         .header h4 {
-            color: #333;
-            font-weight: bold;
-            margin-top: 20px;
+            color: white;
+            font-weight: 600;
+            margin: 0;
         }
 
         .tab-header {
             display: flex;
             justify-content: space-between;
-            border-radius: 0.5rem;
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 25px;
         }
 
         .tab {
@@ -35,9 +56,10 @@
             text-align: center;
             padding: 15px;
             cursor: pointer;
-            background-color: #ffffff;
-            transition: background-color 0.3s, color 0.3s;
+            background-color: white;
+            transition: all 0.3s ease;
             border-right: 1px solid #dee2e6;
+            font-weight: 500;
         }
 
         .tab:last-child {
@@ -45,35 +67,189 @@
         }
 
         .tab.active {
-            background-color: #c99cca;
-            color: rgb(0, 0, 0);
-            font-weight: bold;
+            background: linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%);
+            color: white;
         }
 
-        .tab:hover {
-            background-color: #e2e6ea;
+        .tab:hover:not(.active) {
+            background-color: #f8f9fa;
+            transform: translateY(-2px);
         }
 
         .tab-content {
-            margin-top: 20px;
-            padding: 20px;
-            background-color: #ffffff;
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 25px;
             display: none;
-            /* Initially hide all content */
         }
 
         .tab-content.active {
             display: block;
-            /* Show the content when its tab is active */
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .form-floating {
+            margin-bottom: 15px;
+        }
+
+        .form-control, .form-select {
+            border-radius: 8px;
+            border: 1px solid #ced4da;
+            padding: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #8e44ad;
+            box-shadow: 0 0 0 0.2rem rgba(142, 68, 173, 0.25);
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
         }
 
         .btn-record {
-            background-color: #90EE90;
+            background: linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%);
+            color: white;
             border: none;
-            padding: 10px 20px;
-            margin-top: 10px;
+            box-shadow: 0 4px 15px rgba(142, 68, 173, 0.2);
+        }
+
+        .btn-record:hover {
+            background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(142, 68, 173, 0.3);
+            color: white;
+        }
+
+        h5 {
+            color: #2c3e50;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            color: #34495e;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .alert {
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .user-info {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .user-info:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+                margin-top: 15px;
+            }
+
+            .header {
+                padding: 10px 15px;
+            }
+
+            .tab-header {
+                flex-direction: column;
+                border-radius: 10px;
+            }
+
+            .tab {
+                border-right: none;
+                border-bottom: 1px solid #dee2e6;
+                padding: 10px;
+            }
+
+            .tab:last-child {
+                border-bottom: none;
+            }
+
+            .form-floating {
+                margin-bottom: 10px;
+            }
+
+            .row {
+                margin-right: -5px;
+                margin-left: -5px;
+            }
+
+            .col, .col-md-2, .col-md-4, .col-md-6 {
+                padding-right: 5px;
+                padding-left: 5px;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            h4 {
+                font-size: 1.2rem;
+            }
+
+            .btn {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                padding: 10px;
+            }
+
+            .form-control, .form-select {
+                font-size: 14px;
+            }
+
+            .tab {
+                font-size: 14px;
+            }
+
+            .form-label {
+                font-size: 14px;
+            }
+
+            .row > [class*='col-'] {
+                margin-bottom: 10px;
+            }
+        }
+
+        /* Fix for form controls on mobile */
+        @media (max-width: 768px) {
+            .form-floating > .form-control,
+            .form-floating > .form-select {
+                height: calc(3.5rem + 2px);
+                line-height: 1.25;
+            }
+
+            .form-floating > label {
+                padding: 1rem 0.75rem;
+            }
         }
     </style>
 </head>
@@ -90,11 +266,15 @@
     @endif
     <div class="container mt-4">
         <div class="bg-purple p-3 rounded mb-3">
-            <h2 class="text-black">แบบสำรวจประเมินภาวะการถดถอยของร่างกาย</h2>
+            <h2 class="text-white">แบบสำรวจประเมินภาวะการถดถอยของร่างกาย</h2>
         </div>
-        <form method="POST" action="{{ route('store.volunteer') }}">
+        <form method="POST" action="{{ route('monthly-survey.store') }}">
             @csrf
-            <div class="form-floating mb-3">
+            <input type="hidden" id="e_id" name="e_id">
+            <div class="form-floating mb-4">
+            <div class="text-center">
+                    <h4>แบบข้อมูลผู้สูงอายุ</h4>
+                </div>
                 <div class="">
                     <div class="form-floating">
                         <input type="text" class="form-control" id="id_card" name="id_card" required maxlength="13" oninput="this.value = this.value.replace(/[^0-9]/g, '')" disabled>
@@ -187,7 +367,7 @@
 
 
             <div class="container mt-4">
-                <div class="header text-center">
+                <div class="text-center">
                     <h4>แบบประเมินภาวะถดถอยของร่างกาย</h4>
                 </div>
                 <div class="tab-header mt-4">
@@ -203,14 +383,14 @@
                 <div class="tab-content active" id="movement">
                     <h5>ด้านการเคลื่อนไหวร่างกาย</h5>
                     <label class="form-label">ให้ผู้สูงอายุเดินไปและกลับด้วยตนเอง 6 เมตร ภายในระยะเวลา 12 วินาที ทำได้หรือไม่</label>
-                    <select class="form-select">
+                    <select class="form-select" name="walk_6m">
                         <option selected>เลือกคำตอบ</option>
                         <option value="1">ทำได้</option>
                         <option value="2">ทำไม่ได้</option>
                     </select>
                     <br>
                     <label class="form-label">มีประวัติหกล้มภายใน 6 เดือน อย่างน้อย 1 ครั้งไหม</label>
-                    <select class="form-select">
+                    <select class="form-select" name="fall_6mo">
                         <option selected>เลือกคำตอบ</option>
                         <option value="1">มี</option>
                         <option value="2">ไม่มี</option>
@@ -219,14 +399,14 @@
                 <div class="tab-content" id="nutrition">
                     <h5>ด้านการขาดสารอาหาร</h5>
                     <label class="form-label">น้ำหนักลดมากกว่า 3 กิโลกรัมภายในช่วงเวลา 3 เดือนที่ผ่านมารวมวันนี้ (โดยไม่ได้ตั้งใจ ลดน้ำหนัก)</label>
-                    <select class="form-select">
+                    <select class="form-select" name="weight_loss">
                         <option selected>เลือกคำตอบ</option>
                         <option value="1">มี</option>
                         <option value="2">ไม่มี</option>
                     </select>
                     <br>
                     <label class="form-label">มีความอยากอาหารลดลงหรือไม่</label>
-                    <select class="form-select">
+                    <select class="form-select" name="appetite_loss">
                         <option selected>เลือกคำตอบ</option>
                         <option value="1">มี</option>
                         <option value="2">ไม่มี</option>
@@ -235,7 +415,7 @@
                 <div class="tab-content" id="vision">
                     <h5>ด้านการมองเห็น</h5>
                     <p><label class="form-label">คุณมีปัญหาใดๆเกี่ยวกับดวงตาของคุณ เช่น การมองระยะไกลการอ่านหนังสือ </label>
-                        <select class="form-select">
+                        <select class="form-select" name="vision_problem">
                             <option selected>เลือกคำตอบ</option>
                             <option value="1">มี</option>
                             <option value="2">ไม่มี</option>
@@ -245,7 +425,7 @@
                 <div class="tab-content" id="hearing">
                     <h5>ด้านการได้ยิน</h5>
                     <p><label class="form-label">ให้ถูนิ้วโป้งกับนิ้วชี้ห่างจากหูของผู้สูงอายุประมาณ 1 นิ้ว ทีละข้าง ทั้งหูขวาและ หูซ้าย </label>
-                        <select class="form-select">
+                        <select class="form-select" name="hearing_status">
                             <option selected>เลือกคำตอบ</option>
                             <option value="1">ได้ยินปกติ</option>
                             <option value="2">ไม่ได้ยินทั้ง2ข้าง</option>
@@ -257,14 +437,14 @@
                 <div class="tab-content" id="depression">
                     <h5>ด้านภาวะซึมเศร้า</h5>
                     <p><label class="form-label">ใน 2 สัปดาห์ที่ผ่านมารวมวันนี้ ท่านรู้สึกหดหู เศร้า หรือท้อแท้ สิ้นหวัง หรือไม่</label>
-                        <select class="form-select">
+                        <select class="form-select" name="sadness">
                             <option selected>เลือกคำตอบ</option>
                             <option value="1">มี</option>
                             <option value="2">ไม่มี</option>
                         </select>
                     </p>
                     <label class="form-label">ใน 2 สัปดาห์ที่ผ่านมารวมวันนี้ ท่านรู้สึก เบื่อ ทำอะไรก็ไม่เพลิดเพลิน หรือไม่</label>
-                    <select class="form-select">
+                    <select class="form-select" name="no_pleasure">
                         <option selected>เลือกคำตอบ</option>
                         <option value="1">มี</option>
                         <option value="2">ไม่มี</option>
@@ -273,7 +453,7 @@
                 <div class="tab-content" id="daily">
                     <h5>ด้านการปฏิบัติกิจวัตรประจำวัน</h5>
                     <p><label class="form-label">ความสามารถในการช่วยเหลือตนเองของท่านในการทำกิจวัตรประจำวันโดยไม่ต้องพึ่ง คนอื่น ลดลงหรือไม่ เช่น กินอาหาร ล้างหน้าแปรงฟันหวีผม ลุกนั่งจากที่ นอนหรือเตียง เข้าห้องน้ำ เคลื่อนที่ไปมาในบ้าน สวมใส่เสื้อผ้า</label>
-                        <select class="form-select">
+                        <select class="form-select" name="daily_living">
                             <option selected>เลือกคำตอบ</option>
                             <option value="1">ปกติ</option>
                             <option value="2">ลดลง</option>
@@ -283,14 +463,14 @@
                 <div class="tab-content" id="oral">
                     <h5>ช่องปาก</h5>
                     <p><label class="form-label">ท่านมีความยากลำบากในการเคี้ยวอาหารแข็ง หรือไม่ </label>
-                        <select class="form-select">
+                        <select class="form-select" name="chewing_problem">
                             <option selected>เลือกคำตอบ</option>
                             <option value="1">มี</option>
                             <option value="2">ไม่มี</option>
                         </select>
                     </p>
                     <label class="form-label">ท่านมีอาการเจ็บปวดในช่องปาก หรือไม่</label>
-                    <select class="form-select">
+                    <select class="form-select" name="oral_pain">
                         <option selected>เลือกคำตอบ</option>
                         <option value="1">มี</option>
                         <option value="2">ไม่มี</option>
@@ -299,8 +479,8 @@
                 <p>
                 <div class="col">
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="text" name="text" >
-                        <label for="text">รายละเอียดเพิ่มเติม</label>
+                        <input type="text" class="form-control" id="details" name="details" >
+                        <label for="details">รายละเอียดเพิ่มเติม</label>
                     </div>
                 </div>
                 </p>
@@ -365,6 +545,8 @@
             fetch(`/get-elder-details?fullname=${fullname}`)
                 .then(response => response.json())
                 .then(data => {
+                    console.log('API Response:', data);
+                    document.getElementById('e_id').value = data.e_id;
                     document.getElementById('id_card').value = data.id_card;
                     document.getElementById('titlename').value = data.titlename;
                     document.getElementById('gender').value = data.gender;

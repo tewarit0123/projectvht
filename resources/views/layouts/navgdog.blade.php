@@ -56,7 +56,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">สุขภาพดีมี อสม.</a>
+        <a class="navbar-brand" href="#">Admin</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -64,19 +64,22 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav align-items-center">
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('elderly') ? 'active' : '' }}" href="{{ route('elderly') }}">รายงานผลการสำรวจ</a>
-                </li>
-                <li class="nav-item" hidden>
-                    <a class="nav-link {{ request()->routeIs('formanalysis') ? 'active' : '' }}" href="{{ route('formanalysis') }}">แบบวิเคราะห์</a>
+                    <a class="nav-link {{ request()->routeIs('formvolunteerindex') ? 'active' : '' }}" href="{{ route('formvolunteerindex') }}">ข้อมูล อสม.</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('volunteerss') ? 'active' : '' }}" href="{{ route('volunteerss') }}">แบบสำรวจ</a>
+                    <a class="nav-link {{ request()->routeIs('formelderlyindex') ? 'active' : '' }}" href="{{ route('formelderlyindex') }}">ข้อมูลผู้สูงอายุ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('chvinvillage') ? 'active' : '' }}" href="{{ route('chvinvillage') }}">กำหนด อสม. ให้แต่ละหมู่บ้าน</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('elderinvolunteer') ? 'active' : '' }}" href="{{ route('elderinvolunteer') }}">กำหนดผู้สูงอายุให้ อสม.</a>
                 </li>
                 
                 <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                        <div class="d-inline"> | {{ Auth::guard('chv')->user()->fullname }}</div>
+                        <div class="d-inline"> | </div>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="#">โปรไฟล์</a></li>

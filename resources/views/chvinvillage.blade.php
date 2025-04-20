@@ -146,6 +146,127 @@ body {
 .select2-container--default .select2-selection--single .select2-selection__arrow {
     height: 36px;
 }
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+        margin-top: 15px;
+    }
+
+    .header {
+        padding: 10px 15px;
+    }
+
+    .card {
+        margin-bottom: 15px;
+    }
+
+    .card-body {
+        padding: 15px;
+    }
+
+    .form-container {
+        padding: 15px;
+    }
+
+    .row {
+        margin-right: -5px;
+        margin-left: -5px;
+    }
+
+    .col-md-4 {
+        width: 100%;
+        padding-right: 5px;
+        padding-left: 5px;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    .card-title {
+        font-size: 1.2rem;
+    }
+
+    .btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .modal-dialog {
+        margin: 10px;
+    }
+}
+
+@media (max-width: 576px) {
+    .container {
+        padding: 10px;
+    }
+
+    .form-control, .form-select {
+        font-size: 14px;
+    }
+
+    .card-text {
+        font-size: 14px;
+    }
+
+    .modal-body {
+        padding: 15px;
+    }
+
+    .table {
+        font-size: 14px;
+    }
+
+    .table td, .table th {
+        padding: 8px;
+    }
+}
+
+/* Fix for Select2 on mobile */
+@media (max-width: 768px) {
+    .select2-container {
+        width: 100% !important;
+    }
+
+    .select2-container .select2-selection--single {
+        height: 38px !important;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+        line-height: 36px !important;
+    }
+}
+
+/* Improve table responsiveness */
+@media (max-width: 768px) {
+    .table-responsive {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .modal-dialog.modal-xl {
+        max-width: 95%;
+        margin: 10px auto;
+    }
+}
+
+/* Fix button layout on mobile */
+@media (max-width: 768px) {
+    .card .btn {
+        display: block;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .card .btn:last-child {
+        margin-bottom: 0;
+    }
+}
 </style>
 
 <body>

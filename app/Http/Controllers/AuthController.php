@@ -20,7 +20,7 @@ class AuthController extends Controller
         // ตรวจสอบว่าผู้ใช้ล็อกอินอยู่หรือไม่
         if (Auth::check()) {
             // ถ้าล็อกอินอยู่แล้ว เปลี่ยนเส้นทางไปยังหน้า dashboard
-            return redirect()->route('dashboard');
+            return redirect()->route('elderly');
         }
 
         // ถ้ายังไม่ล็อกอิน ให้แสดงหน้า login
@@ -32,14 +32,32 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
+        // Validate based on user type
+        if ($request->user_type === 'elderly') {
+            $request->validate([
+                'id_card' => 'required|string|size:13',
+            ]);
+
+            // ค้นหาผู้สูงอายุจากเลขบัตรประชาชน
+            $elder = Elder::where('id_card', $request->id_card)->first();
+
+            if ($elder) {
+                // Store elder data in session
+                $request->session()->put('elder_id', $elder->e_id);
+                $request->session()->put('user_type', 'elderly');
+                
+                return redirect()->route('elder.dashboard');
+            }
+
+            return back()->withErrors(['login_error' => 'เลขบัตรประชาชนไม่ถูกต้อง']);
+        }
+
+        // ... existing code for CHV login ...
         $request->validate([
             'username' => 'required',
             'password' => 'required',
         ]);
 
-        $villages = Village::all(); // Fetch all villages
-        
-        // ค้นหาผู้ใช้จากตาราง chv พร้อม join ข้อมูลหมู่บ้าน
         $user = chv::leftJoin('chvin_v', 'chv.id_card', '=', 'chvin_v.idchv')
             ->leftJoin('village', 'chvin_v.v_id', '=', 'village.v_id')
             ->select('chv.*', 'village.v_name as village_name')
@@ -47,12 +65,12 @@ class AuthController extends Controller
             ->first();
 
         if ($user && Hash::check($request->password, $user->password)) {
-            Auth::guard('chv')->login($user); // ใช้ Guard ที่กำหนด
-
+            Auth::guard('chv')->login($user);
             $request->session()->regenerate();
             $request->session()->put('username', $request->username);
+            $request->session()->put('user_type', 'chv');
 
-            return redirect()->route('dashboard');
+            return redirect()->route('elderly');
         }
 
         return back()->withErrors(['login_error' => 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง']);

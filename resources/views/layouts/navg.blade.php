@@ -76,7 +76,7 @@
                     <a class="nav-link {{ request()->routeIs('chvinvillage') ? 'active' : '' }}" href="{{ route('chvinvillage') }}">กำหนด อสม. ให้แต่ละหมู่บ้าน</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('userinelder') ? 'active' : '' }}" href="{{ route('userinelder') }}">การกำหนด User ให้กับผู้ดูแลผู้สูงอายุ</a>
+                    <a class="nav-link {{ request()->routeIs('doctor') ? 'active' : '' }}" href="{{ route('doctor') }}">การกำหนด User ให้กับหมอ</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('elderinvolunteer') ? 'active' : '' }}" href="{{ route('elderinvolunteer') }}">กำหนดผู้สูงอายุให้ อสม.</a>
@@ -89,11 +89,10 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="#">โปรไฟล์</a></li>
-                        <li><a class="dropdown-item" href="#">ตั้งค่า</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">ออกจากระบบ</a></li>
+                        <li><a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fas fa-sign-out-alt me-2"></i>ออกจากระบบ</a></li>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
                         </form>

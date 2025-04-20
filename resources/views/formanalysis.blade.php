@@ -1,57 +1,233 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>แบบสำรวจ</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         .bg-purple {
-            background-color: #e6b3e6;
+            background: linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%);
+            color: white;
         }
 
         body {
-            background-color: #f4f6f9;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            font-family: 'Kanit', sans-serif;
+        }
+
+        .container {
+            background-color: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(142, 68, 173, 0.2);
         }
 
         .header h4 {
-            color: #333;
-            font-weight: bold;
-            margin-top: 20px;
+            color: white;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .form-floating {
+            margin-bottom: 15px;
+        }
+
+        .form-control, .form-select {
+            border-radius: 8px;
+            border: 1px solid #ced4da;
+            padding: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #8e44ad;
+            box-shadow: 0 0 0 0.2rem rgba(142, 68, 173, 0.25);
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
         }
 
         .btn-record {
-            background-color: #90EE90;
+            background: linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%);
+            color: white;
             border: none;
-            padding: 8px 20px;
-            font-weight: 500;
+            box-shadow: 0 4px 15px rgba(142, 68, 173, 0.2);
         }
 
         .btn-record:hover {
-            background-color: #7ac97a;
+            background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(142, 68, 173, 0.3);
+            color: white;
         }
 
-        .card-header {
-            padding: 0.5rem 1rem;
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-body {
+            padding: 25px;
+        }
+
+        .card-title {
+            color: #2c3e50;
+            font-weight: 600;
+            margin-bottom: 20px;
         }
 
         h6 {
-            color: #666;
+            color: #34495e;
             font-weight: 600;
+            margin-bottom: 15px;
         }
 
         .form-floating textarea.form-control {
             height: 100px !important;
+            border-radius: 8px;
         }
 
-        .form-control {
-            border: 1px solid #ddd;
+        .alert {
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
-        .form-floating textarea {
-            height: 100%;
+        .text-center h2 {
+            color: #2c3e50;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+                margin-top: 15px;
+            }
+
+            .header {
+                padding: 10px 15px;
+            }
+
+            .card {
+                margin-bottom: 15px;
+            }
+
+            .card-body {
+                padding: 15px;
+            }
+
+            .form-floating {
+                margin-bottom: 10px;
+            }
+
+            .row {
+                margin-right: -5px;
+                margin-left: -5px;
+            }
+
+            .col, .col-md-2, .col-md-4, .col-md-6 {
+                padding-right: 5px;
+                padding-left: 5px;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            h4 {
+                font-size: 1.2rem;
+            }
+
+            .btn {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            textarea.form-control {
+                min-height: 100px !important;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                padding: 10px;
+            }
+
+            .form-control, .form-select {
+                font-size: 14px;
+            }
+
+            .card-title {
+                font-size: 1.1rem;
+            }
+
+            h6 {
+                font-size: 1rem;
+            }
+
+            .row > [class*='col-'] {
+                margin-bottom: 10px;
+            }
+        }
+
+        /* Fix for form controls on mobile */
+        @media (max-width: 768px) {
+            .form-floating > .form-control,
+            .form-floating > .form-select {
+                height: calc(3.5rem + 2px);
+                line-height: 1.25;
+            }
+
+            .form-floating > label {
+                padding: 1rem 0.75rem;
+            }
+
+            .form-floating > textarea.form-control {
+                height: 100px !important;
+            }
+        }
+
+        /* Improve card layout on mobile */
+        @media (max-width: 768px) {
+            .row.d-flex.align-items-stretch {
+                flex-direction: column;
+            }
+
+            .col-md-6 {
+                width: 100%;
+                margin-bottom: 15px;
+            }
+
+            .card {
+                height: auto !important;
+            }
         }
     </style>
 </head>
@@ -68,7 +244,7 @@
 
     <div class="container mt-4">
         <div class="bg-purple p-3 rounded mb-3">
-            <h2 class="text-black">ข้อมูลแบบสำรวจผู้สูงอายุ</h2>
+            <h2 class="text-white">ข้อมูลแบบสำรวจผู้สูงอายุ</h2>
         </div>
         <form method="POST" action="#">
             @csrf
